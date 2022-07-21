@@ -1,0 +1,30 @@
+{
+	"name": "custom-card-component",
+	"version": "0.0.1",
+	"private": false,
+	"description": "Custom card component",
+	"keywords": [
+		"ServiceNow",
+		"Now Experience UI Component",
+		"custom-card-component"
+	],
+	"readme": "./README.md",
+	"engines": {
+		"node": ">=8.6.0",
+		"npm": ">=5.3.0"
+	},
+	"module": "src/index.js",
+	"dependencies": {
+		"@servicenow/ui-core": "quebec",
+		"@servicenow/ui-renderer-snabbdom": "quebec",
+		"@servicenow/cli-archetype": "21.0.7",
+		"@servicenow/cli-component-archetype": "21.0.7",
+		"@servicenow/sass-theme": "quebec",
+		"@servicenow/sass-kit": "quebec",
+		"@servicenow/library-translate": "quebec"
+	},
+	"devDependencies": {
+		"@servicenow/cli-archetype-dev": "21.0.7",
+		"@servicenow/cli-component-archetype-dev": "21.0.7"
+	}
+}
