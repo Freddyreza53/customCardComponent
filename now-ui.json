@@ -1,15 +1,86 @@
 {
 	"components": {
-	    "x-853443-custom-card-component": {
-	        "innerComponents": [],
+		"x-853443-custom-card-component": {
+			"innerComponents": [],
 			"uiBuilder": {
-				"associatedTypes": ["global.core", "global.landing-page"],
+				"associatedTypes": [
+					"global.core",
+					"global.landing-page"
+				],
 				"label": "My Component",
 				"icon": "document-outline",
 				"description": "A description of my component",
 				"category": "primitives"
-			}
-	    }
+			},
+			"properties": [
+				{
+					"name": "sysId",
+					"label": "SysId",
+					"fieldType": "string",
+					"defaultValue": ""
+				},
+				{
+					"name": "header1",
+					"label": "Primary Header",
+					"fieldType": "string",
+					"defaultValue": "Primary Header"
+				},
+				{
+					"name": "header2",
+					"label": "Secondary Header",
+					"fieldType": "string",
+					"defaultValue": "Secondary Header"
+				},
+				{
+					"name": "mainTitle",
+					"label": "Main Title",
+					"fieldType": "string",
+					"defaultValue": "Main Title"
+				},
+				{
+					"name": "mainSubheader1",
+					"label": "Primary Main Subheader",
+					"fieldType": "string",
+					"defaultValue": "Primary Main Subheader"
+				},
+				{
+					"name": "mainSubheader2",
+					"label": "Secondary Main Subheader",
+					"fieldType": "string",
+					"defaultValue": "Secondary Main Subheader"
+				},
+				{
+					"name": "footer1",
+					"label": "Footer Item 2",
+					"fieldType": "string",
+					"defaultValue": ""
+				},
+				{
+					"name": "footer2",
+					"label": "Footer Item 2",
+					"fieldType": "string",
+					"defaultValue": ""
+				},
+				{
+					"name": "footer3",
+					"label": "Footer Item 3",
+					"fieldType": "string",
+					"defaultValue": ""
+				},
+				{
+					"name": "footer4",
+					"label": "Footer Item 4",
+					"fieldType": "string",
+					"defaultValue": ""
+				},
+				{
+					"name": "logoImage",
+					"label": "Logo Image",
+					"fieldType": "string",
+					"defaultValue": ""
+				}
+			]
+		}
 	},
 	"scopeName": "x_853443_custom_0"
 }
