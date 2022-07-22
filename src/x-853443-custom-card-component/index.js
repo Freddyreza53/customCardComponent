@@ -30,13 +30,13 @@ const view = ({properties}, {dispatch}) => {
 			//  value={sysId}
 			>
 			<header className='headerContainer'>
-				<img src={logoImage} height='50px' width='50px'/>
+				{logoImage && <img src={logoImage} height='50px' width='50px'/>}
 				<div>
 					<div>{header1}</div>
 					<div>{header2}</div>
 				</div>
 			</header>
-			<div className='bottomHalf'>
+			
 			<main className='mainContainer'>
 				<div className='mainTitle'>{mainTitle}</div>
 				<div>{mainSubheader1}</div>
@@ -48,7 +48,6 @@ const view = ({properties}, {dispatch}) => {
 				<div>{footer3}</div>
 				<div>{footer4}</div>
 			</footer>	
-			</div>
 		</div>
 	);
 };
@@ -63,7 +62,7 @@ createCustomElement('x-853443-custom-card-component', {
 		mainTitle: {default: 'Service Portal Feature Update'},
 		mainSubheader1: {default: ''},
 		mainSubheader2: {default: ''},
-		footer1: {default: 'test'},
+		footer1: {default: ''},
 		footer2: {default: ''},
 		footer3: {default: ''},
 		footer4: {default: ''},
