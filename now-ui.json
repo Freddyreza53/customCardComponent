@@ -1,6 +1,6 @@
 {
 	"components": {
-		"x-853443-custom-card-component": {
+		"x-esg-custom-card-component": {
 			"innerComponents": [],
 			"uiBuilder": {
 				"associatedTypes": [
@@ -88,5 +88,5 @@
 			]
 		}
 	},
-	"scopeName": "x_853443_custom_0"
+	"scopeName": "x_esg_custom_0"
 }

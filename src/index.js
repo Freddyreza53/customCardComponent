@@ -1,1 +1,1 @@
-import './x-853443-custom-card-component';
+import './x-esg-custom-card-component';

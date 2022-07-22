@@ -52,7 +52,7 @@ const view = ({properties}, {dispatch}) => {
 	);
 };
 
-createCustomElement('x-853443-custom-card-component', {
+createCustomElement('x-esg-custom-card-component', {
 	renderer: {type: snabbdom},
 	view,
 	styles,
