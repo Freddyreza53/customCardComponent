@@ -7,15 +7,21 @@
 					"global.core",
 					"global.landing-page"
 				],
-				"label": "My Component",
+				"label": "Custom Card Component",
 				"icon": "document-outline",
-				"description": "A description of my component",
+				"description": "A configureable overview of",
 				"category": "primitives"
 			},
 			"properties": [
 				{
 					"name": "sysId",
 					"label": "SysId",
+					"fieldType": "string",
+					"defaultValue": ""
+				},
+				{
+					"name": "table",
+					"label": "Table",
 					"fieldType": "string",
 					"defaultValue": ""
 				},
@@ -51,7 +57,7 @@
 				},
 				{
 					"name": "footer1",
-					"label": "Footer Item 2",
+					"label": "Footer Item 1",
 					"fieldType": "string",
 					"defaultValue": ""
 				},
