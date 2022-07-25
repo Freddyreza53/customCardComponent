@@ -27,40 +27,41 @@ custom-card-component
 - Create a Data Resource Instance.
 - Return all desired fields
 
-### Client Script
-
-- Go to Client Scripts.
-- Click "+ADD" to add page script.
-- Update handler function to match:
-    ```
-    function handler({api, event, helpers, imports}) {
-        const {emit} = api;
-        const sysId = event.payload.sysId;
-        const table = event.payload.table;
-        try {
-            if (sysId) {
-                // dispatch action with app route and route parameters
-                emit('NAV_ITEM_SELECTED', {
-                    route: "record",
-                    fields: {
-                        table,
-                        sysId
-                    }
-                });
-            }
-        } catch (e) {}
-    }
-    ```
-
 ### Assign Event
 
 - Go to "Your instance name here".service-now.com/sys_ux_event_list
 - Click "New" to create event.
 - Event Name should be the same from index.js file under "actionHandlers".
+- Inside of Porperties you want to list the ones you plan to use. 
+---
+Example for sys_id and table:
+    
+    [
+        {
+            "name":"sysId",
+            "fieldType":"string",
+            "label":"SysId",
+            "interfaceApiName":"global.route",
+            "typeMetadata":null,
+            "mandatory":false,
+            "readOnly":false
+        },
+        {
+            "name":"table",
+            "fieldType":"string",
+            "label":"Table",
+            "interfaceApiName":"global.route",
+            "typeMetadata":null,
+            "mandatory":false,
+            "readOnly":false
+        }
+    ]
+    
+---
 - Save event.
 - Head to "Your instance name here".service-now.com/sys_ux_macroponent_list.do.
 - Search for the component name and open.
 - At the top of the page you might need to click "here" in order to edit record.
 - Scroll down to "Dispatched Events" and add the event you created.
 - Check UI Builder and see if your component can add event handler.
-- Assign client script that you created.
+- Assign event handler you want to use.
