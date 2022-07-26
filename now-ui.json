@@ -84,6 +84,22 @@
 					"label": "Logo Image",
 					"fieldType": "string",
 					"defaultValue": ""
+				},
+				{
+					"name": "logoFit",
+					"label": "Logo Fit",
+					"fieldType": "choice",
+					"readOnly": false,
+					"choices": [
+						{
+							"label": "Contain",
+							"value": "contain"
+						},
+						{
+							"label": "Cover",
+							"value": "cover"
+						}
+					]
 				}
 			]
 		}

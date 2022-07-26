@@ -16,7 +16,8 @@ const view = ({properties}, {dispatch}) => {
 		footer4,
 		logoImage,
 		sysId,
-		table
+		table,
+		logoFit
 	} = properties;
 
 	const handleClick = () => {
@@ -47,6 +48,7 @@ const view = ({properties}, {dispatch}) => {
 				<div>{footer2}</div>
 				<div>{footer3}</div>
 				<div>{footer4}</div>
+				<div>{logoFit}</div>
 			</footer>	
 		</div>
 	);
@@ -60,7 +62,7 @@ createCustomElement('x-esg-custom-card-component', {
 		header1: {default: 'Header 1'},
 		header2: {default: 'Header 2'},
 		mainTitle: {default: 'Main Title'},
-		mainSubheader1: {default: 'hadhf hfoijasd hiijcekj fjifjd  fhjao;seihoif jdihf dk kjasdh;k fhidi gf idjia jsijis dfij di idhi hg asdifhi aiojhdf hadhf hfoijasd hiijcekj fjifjd  fhjao;seihoif jdihf dk kjasdh;k fhidi gf idjia jsijis dfij di idhi hg asdifhi aiojhdf'},
+		mainSubheader1: {default: ''},
 		mainSubheader2: {default: ''},
 		footer1: {default: ''},
 		footer2: {default: ''},
@@ -69,12 +71,14 @@ createCustomElement('x-esg-custom-card-component', {
 		logoImage: {default: ''},
 		sysId: {default: ''},
 		table: {default: ''},
+		logoFit: {default: ''}
 	},
 	actionHandlers:{
 		"CUSTOM_CARD_COMPONENT#CLICKED": ({action}) => {
 			console.log(action.payload);
 		}
 	},
+	
 	// eventHandlers: [
 	// 	{
 	// 		events: ['click'],

@@ -20,11 +20,13 @@ custom-card-component
 
 ### Add Component
 
-- Navigate to UI Builder in App Engine Studio
-- Locate and add component to page
+1. Navigate to UI Builder in App Engine Studio
+2. Locate and add component to page
+
 
 ### Bind Data
 - Create a Data Resource Instance.
+- 
 - Return all desired fields
 
 ### Assign Event
