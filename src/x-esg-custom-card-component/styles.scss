@@ -1,13 +1,9 @@
 @import '@servicenow/sass-kit/host';
 
-
-
-
 .cardContainer {
     $font-size-large: 18px;
     $font-size-medium: 14px;
     $font-size-small: 12px;
-    $hover-transition-time: .1s;
     $padding: 5px;
 
     height: 100%;
@@ -41,6 +37,12 @@
         border-top: 1px solid black;
         border-bottom: 1px solid black;
         font-size: $font-size-medium;
+        * {
+            overflow: hidden;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            display:-webkit-box;
+        }
 
         .mainTitle {
             font-size: $font-size-large;
@@ -58,14 +60,6 @@
         }
     }
 
-    // .bottomHalf {
-    //     display: flex;
-    //     width: 100%;
-    //     height: 100%;
-    //     flex-direction: column;
-    //     justify-content: space-between;
-    // }
-
     img {
         margin-right: 20px;
         border-radius: 100px;
@@ -75,8 +69,5 @@
 
     &:hover {
         cursor: pointer;
-        box-shadow: 2px 2px 3px gray;
-        transform: translate(-1px, -1px);
-        transition: box-shadow $hover-transition-time, transform $hover-transition-time;
     }
 }
