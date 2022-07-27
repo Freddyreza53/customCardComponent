@@ -31,7 +31,7 @@ const view = ({properties}, {dispatch}) => {
 			//  value={sysId}
 			>
 			<header className='headerContainer'>
-				{logoImage && <img src={logoImage} height='50px' width='50px'/>}
+				{logoImage && <img src={logoImage} style={{objectFit: logoFit}} height='50px' width='50px'/>}
 				<div>
 					<div>{header1}</div>
 					<div>{header2}</div>
@@ -48,13 +48,12 @@ const view = ({properties}, {dispatch}) => {
 				<div>{footer2}</div>
 				<div>{footer3}</div>
 				<div>{footer4}</div>
-				<div>{logoFit}</div>
 			</footer>	
 		</div>
 	);
 };
 
-createCustomElement('x-esg-custom-card-component', {
+createCustomElement('x-853443-custom-card-component', {
 	renderer: {type: snabbdom},
 	view,
 	styles,

@@ -1,6 +1,6 @@
 {
 	"components": {
-		"x-esg-custom-card-component": {
+		"x-853443-custom-card-component": {
 			"innerComponents": [],
 			"uiBuilder": {
 				"associatedTypes": [
@@ -90,19 +90,28 @@
 					"label": "Logo Fit",
 					"fieldType": "choice",
 					"readOnly": false,
-					"choices": [
-						{
-							"label": "Contain",
-							"value": "contain"
-						},
-						{
-							"label": "Cover",
-							"value": "cover"
+					"typeMetadata": {
+						"choices": [
+							{
+								"label": "Contain",
+								"value": "contain"
+							},
+							{
+								"label": "Cover",
+								"value": "cover"
+							}
+						],
+						"schema": {
+						"type": "string",
+						"enum": [
+							"contain",
+							"cover"
+						]
 						}
-					]
+					}
 				}
 			]
 		}
 	},
-	"scopeName": "x_esg_custom_0"
+	"scopeName": "x_853443_custom_0"
 }
