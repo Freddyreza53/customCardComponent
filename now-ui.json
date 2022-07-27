@@ -9,7 +9,7 @@
 				],
 				"label": "Custom Card Component",
 				"icon": "document-outline",
-				"description": "A configureable overview of",
+				"description": "A configurable card to display record info, supports a click event.",
 				"category": "primitives"
 			},
 			"properties": [
