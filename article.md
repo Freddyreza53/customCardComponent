@@ -48,10 +48,26 @@ The solution we settled on doesn't actually require that record to be created at
 
 2. Second, to get the event to actually show up in the UIB sidebar when the component is selected, navigate to the `sys_ux_macroponent` table, search by the name of your custom component, and click the lock for 'Dispatched Events'. Reference the event we just created in `sys_ux_event`, and save the record.
 
-At with these two steps complete, the event appears in the component sidebar, it can be mapped just like any other UIB event, and the payload values can be used in event handlers by clicking the 'Dynamic Data Binding' button above a field and using the `@payload` variable.
+At with these two steps complete, the custom event appears in the component sidebar, it can be mapped just like any other UIB event, and the payload values can be used in event handlers by clicking the 'Dynamic Data Binding' button above a field and using the `@payload` variable.
 
+For our component, we had already created a UIB page to display a record (based on the template) and set it up with required parameters of `table` and `sysId`, so all that was left was to add the inherited 'Link to destination' event handler on our newly visible click event, and configure it as normal, choosing the 'Record' App route and using `@payload` to pass the required parameters.
 
+While we did eventually get this working, we still have a lot of questions - and some aspects of the process are definitely not working as intended. For instance, using `--force` when deploying will delete and re-create the `sys_ux_macroponent` record, so part of our deployment checklist includes re-referencing that Dispatched Event on every deployment. Also, the [Action Config](https://developer.servicenow.com/dev.do#!/reference/now-experience/sandiego/ui-framework/main-concepts/action-config) docs say to "Watch this space for changes to the APIs," so we're hopeful that those changes will address this workaround, and streamline the deployment process.
 
+### The Repeater Component
+
+The above describes the necessary steps to get a single component with custom events working, but our ultimate goal was to render an entire series of cards from a list of records - to do that, we went by the books, by adding a data resource instance and using the built-in UIB Repeater component.
+
+Data resources are very handy and quick-to-use in UIB - clicking the pancakes (database) icon in the left navigation bar opens the Data resource instances panel. From there, it's relatively simple to add a new resource by searching for the global-scoped 'Look Up Records' resource, and configuring it to return an array of objects representing the records we want to display. The preview is particularly helpful, especially if we want to display data from references, as it could potentially be nested pretty deeply, and doesn't follow the dot-walking syntax found elsewhere in ServiceNow.
+
+We were surprised to find out that data resource syntax isn't even typical javascript - for example, the following expression would target the email address of the user referenced on the first item of a data resource (with the name `lookup_records_1`), previewed in the image below (note the lack of square brackets to target index 0 of the array, and the use of `_reference` rather than just dot-walking):
+
+```
+@data.lookup_records_1.0.assigned_to._reference.email.value;
+// @data.<data-resource>.<index>.<field>._reference.<referenced-record-field>.<value/displayValue>
+```
+
+<img src="images/article/article_5.png" alt="An example of the preview returned from a configured data resource." />
 
 ## Other stuff
 
