@@ -1,5 +1,7 @@
 # Custom Components In Action: Simple Card
 
+<img src="images/article/article_cover.png" alt="Example of custom cards" />
+
 The UI Builder experience is constantly evolving, and is new to many ServiceNow developers. For this reason, there are occasionally some issues that arise that can be difficult to solve or workaround. Recently, we developed a custom component for just this reason - to rapidly build a modular and reusable component tailored specifically to our requirements, providing a quick workaround for the issue we were encountering, and available for easy iteration and adjustment looking forward.
 
 It is, by no means, a perfect component, but the journey of creating and deploying it taught us a lot about the Now UI Framework - we're happy to share our experience, and would love to hear about yours as well!
@@ -63,11 +65,29 @@ Data resources are very handy and quick-to-use in UIB - clicking the pancakes (d
 We were surprised to find out that data resource syntax isn't even typical javascript - for example, the following expression would target the email address of the user referenced on the first item of a data resource (with the name `lookup_records_1`), previewed in the image below (note the lack of square brackets to target index 0 of the array, and the use of `_reference` rather than just dot-walking):
 
 ```
-@data.lookup_records_1.0.assigned_to._reference.email.value;
-// @data.<data-resource>.<index>.<field>._reference.<referenced-record-field>.<value/displayValue>
+@data.lookup_records_1.results.0.assigned_to._reference.email.value;
+// @data.<data-resource>.results.<index>.<field>._reference.<referenced-record-field>.<value/displayValue>
 ```
 
 <img src="images/article/article_5.png" alt="An example of the preview returned from a configured data resource." />
+
+This gets a little wordy, but ultimately isn't so bad. To map an array of custom card components, it's just a matter of passing the results from our data resource to the repeater: 
+
+<img src="images/article/article_6.png" alt="Passing results from a data resource to a repeater." />
+
+And then using `@item.value` on components within the repeater to grab what we need from each item in the result array. Using the previous example:
+
+<img src="images/article/article_6.png" alt="Passing results from a data resource to a repeater." />
+
+And here's what the first couple fields look like in our component config - since everything was from the same table, it was easier to just insert the table name, but for the rest of the fields, we used the `@item` variable: 
+
+<img src="images/article/article_8.png" alt="Passing results from a data resource to a repeater." />
+
+## Migration
+
+With the repeater passing the appropriate `sys_id` and other data to each card component, and using our custom event to trigger an event handler and pass it a payload with that `sys_id`, our array of cards worked as intended! Clicking a card would bring us to the correct record view, and using the repeater meant that we only had configuring the card event and mapping the data to the card fields only had to be done once.
+
+The final step was installing the component on one of our company's actual dev instances, since we had been testing it on a PDI while we developed it. This required setting up an additional profile for the ServiceNow CLI on our machine, 
 
 ## Other stuff
 
