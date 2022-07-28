@@ -6,7 +6,7 @@ custom-card-component
 
 ### Prerequisites
 
-- UI Framework installed and configured configured with profile (steps 1-3 from https://creator-dna.com/blog/macos-setup).
+- ServiceNow CLI installed and configured configured with profile (steps 1-3 from https://creator-dna.com/blog/macos-setup).
 - Node, not newest version, v12.16.1 is mentioned on https://developer.servicenow.com/dev.do#!/reference/now-experience/sandiego/cli/faqs (seems to work just fine with v14.20.0).
 - Python 2
 
