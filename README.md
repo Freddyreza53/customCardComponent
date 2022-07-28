@@ -110,10 +110,10 @@ Example for sys_id and table:
 
 <img src='images/addEvent5.png' />
 
-13. Assign Link to Destination even handler and give it table and sysId.
+13. Assign Link to Destination event handler and give it table and sysId.
 
 <img src='images/addEvent6.png' />
 
-14. Save chagnes to your page and open to test. 
+14. Save changes to your page and open to test. 
 
 At this point, your custom component will open record when clicked. 
