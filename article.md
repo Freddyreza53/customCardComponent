@@ -87,7 +87,19 @@ And here's what the first couple fields look like in our component config - sinc
 
 With the repeater passing the appropriate `sys_id` and other data to each card component, and using our custom event to trigger an event handler and pass it a payload with that `sys_id`, our array of cards worked as intended! Clicking a card would bring us to the correct record view, and using the repeater meant that we only had configuring the card event and mapping the data to the card fields only had to be done once.
 
-The final step was installing the component on one of our company's actual dev instances, since we had been testing it on a PDI while we developed it. This required setting up an additional profile for the ServiceNow CLI on our machine, 
+The final step was installing the component on one of our company's actual dev instances, since we had been testing it on a PDI while we developed it. This required setting up an additional profile for the ServiceNow CLI on our machine with `snc configure profile set`, and manually replacing the application scope with our company's vendor prefix before running `snc ui-component deploy --profile <company-instance-profile>`.
+
+Following that, we had to perform the first-time setup tasks of creating the `sys_ux_event` record, and referencing it as a dispatched event in our component's record in the `sys_ux_macroponent` table.
+
+> When redeploying using `--force`, the event record doesn't need to be created again, but it does have to be re-attached as a dispatched action on the macroponent.
+
+With that finished, the component was available to our colleagues to use just like any other in UI Builder!
+
+## Final Thoughts
+
+This was our first try
+
+
 
 ## Other stuff
 
