@@ -2,7 +2,7 @@ import {createCustomElement} from '@servicenow/ui-core';
 import snabbdom from '@servicenow/ui-renderer-snabbdom';
 import styles from './styles.scss';
 
-const view = ({properties}, {dispatch}) => {
+const view = (state, {dispatch}) => {
 
 	const {
 		header1, 
@@ -18,17 +18,15 @@ const view = ({properties}, {dispatch}) => {
 		sysId,
 		table,
 		logoFit
-	} = properties;
+	} = state.properties;
 
 	const handleClick = () => {
 		dispatch('CUSTOM_CARD_COMPONENT#CLICKED', {sysId, table})
 	}
 
 	return (
-		<div id='card-container' 
-			className='cardContainer' 
+		<div className='cardContainer' 
 			on-click={handleClick}
-			//  value={sysId}
 			>
 			<header className='headerContainer'>
 				{logoImage && <img src={logoImage} height='50px' width='50px'/>}

@@ -18,9 +18,44 @@ Our component was super simple, so we're not going to go into much detail about 
 
 <img src="images/article/article_1.png" alt="The now-ui.json file, configured with component properties."/>
 
->Note: All of these properties were set up to accept primitives. As we soon learned, that can get a little tiresome when it comes to referencing each specific thing in the repeater, and may not be appropriate for very complex components, but works fine and keeps things generic when you only have a few properties.
+>Note: We set up our component properties as only primitives. As we soon learned, that can get a little tiresome when it comes to referencing each specific thing in the repeater, and may not be appropriate for very complex components, but works fine and keeps things generic when you only have a few properties.
+
+These properties map to the properties configured in our `createCustomElement` function:
+
+<img src="images/article/article_2.png" alt="Our matching properties configuration in the createCustomElement function"/>
+
+And are then destructured in the `view` and displayed on the DOM:
+
+<img src="images/article/article_3.png" alt="The 'view' function of our component, with the properties destructured and referenced in the return statement."/>
+
+Since most of the properties we were injecting are simply strings, we only had to use a single short-circuit to conditionally render the img element, omitting it from the card header if nothing is passed via the image property. A few css rules in the `styles.scss` file controlled the inner styles, while the outer dimensions, border, margin and padding we left to be controlled by the built in UIB style panel.
+
+From there, the next step was emitting a custom event. We destructured the `dispatch` helper (which is automatically supplied to the `view` component), created a simple `handleClick` function to dispatch an action with the type `'CUSTOM_CARD_COMPONENT#CLICKED'`, and attached it to the outermost div of the `view`, so that a click anywhere on the card would fire the action.
+
+<img src="images/article/article_4.png" alt="The view function, with dispatch destructured from the second parameter and a handleClick function attached to the containing div."/>
+
+### Using Component Actions in UI Builder
+
+Here's where the tricky part comes in - at this point, we had an action that fires on click, bubbles up through the DOM, and could be used to trigger action handlers defined on our component or ancestor components (not necessary for this simple component)...however, when we logged the UIB interface, the 'Events' tab for our component remained empty.
+
+While there *are* configuration options mentioned in the docs that seem like they should address this, none of them worked for us. Including our actions in the `now-ui.json` file according to the [Component Configuration docs](https://developer.servicenow.com/dev.do#!/reference/now-experience/sandiego/cli/now-ui-config) creates a record in the `sys_ux_lib_component_action` table, but it's unclear to us what exactly this record is for.
+
+The solution we settled on doesn't actually require that record to be created at all - from watching [this video posted by Darren Richards](https://www.youtube.com/watch?v=fyBVjuAY1wo), we discovered that there's a two-step workaround for getting UI Builder to recognize the events.
+
+1. First, to allow UIB to recognize the event, create a new record in `sys_ux_event`. It should contain a Label (can be anything), an Event Name (the name of the action, ex: CUSTOM_CARD_COMPONENT#CLICKED), and, for the `@payload` autofill options to work correctly in the UIB event handlers, the Properties field must contain an array of objects containing (at least) a `name` key corresponding to each property of the payload that we want to target. 
+
+>Note: We noticed the properties field for many of the events in this table corresponded exactly to the properties as defined in the `now-ui.json` properties array (including "fieldType", "label", "description", etc.). This is easier to copy/paste over, but we're unsure whether anything but the name is actually necessary. Simply including `[{"name": "sysId"}, {"name": "table"}]` worked for our purposes, allowing UI builder to recognize the `@payload` and provide the list of keys it contains.
+
+2. Second, to get the event to actually show up in the UIB sidebar when the component is selected, navigate to the `sys_ux_macroponent` table, search by the name of your custom component, and click the lock for 'Dispatched Events'. Reference the event we just created in `sys_ux_event`, and save the record.
+
+At with these two steps complete, the event appears in the component sidebar, it can be mapped just like any other UIB event, and the payload values can be used in event handlers by clicking the 'Dynamic Data Binding' button above a field and using the `@payload` variable.
 
 
+
+
+## Other stuff
+
+- Having to restart a brand new app
 
 ## Reflection
 
