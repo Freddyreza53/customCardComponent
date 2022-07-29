@@ -103,7 +103,7 @@ This was definitely a learning experience for us - it was neat to work out how s
 
 We wanted to make sure we mentioned the largest issue we had in the development of this component, because it was certainly a headscratcher and cost us a significant amount of time.
 
-For some reason, on the instance we were testing, our event handlers were all showing up, but some were suffixed with "(to be deprecated)" - and these event handlers weren't accepting our custom event. We couldn't figure out what was causing this, and ended up doing a sub-optimal workaround by catching the event at the page level and hijacking an existing action, `'NAV_ITEM_SELECTED'`. Ultimately, though, loading up a new application solved this problem, and fixed our component-level event handlers so that we didn't have to script a workaround - but we have no idea where the wires got crossed there. 
+For some reason, on the instance we were testing, our event handlers were all showing up, but some were suffixed with "(to be deprecated)" - and these event handlers weren't accepting our custom event. We couldn't figure out what was causing this, and temporarily circumvented the issue with a sub-optimal workaround by catching the event at the page level and hijacking an existing action, `'NAV_ITEM_SELECTED'`. Ultimately, though, loading up a new application solved this problem, and fixed our component-level event handlers so that we could configure them directly in the UI, without scripting a workaround - but we have no idea where the wires got crossed there. 
 
 ## Conclusion
 
