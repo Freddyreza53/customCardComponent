@@ -40,7 +40,7 @@ From there, the next step was emitting a custom event. We destructured the `disp
 
 Here's where the tricky part comes in - at this point, we had an action that fires on click, bubbles up through the DOM, and could be used to trigger action handlers defined on our component or ancestor components (not necessary for this simple component)...however, when we logged the UIB interface, the 'Events' tab for our component remained empty.
 
-While there *are* configuration options mentioned in the docs that seem like they should address this, none of them worked for us. Including our actions in the `now-ui.json` file according to the [Component Configuration docs](https://developer.servicenow.com/dev.do#!/reference/now-experience/sandiego/cli/now-ui-config) creates a record in the `sys_ux_lib_component_action` table, but it's unclear to us what exactly this record is for.
+While there are configuration options mentioned in the docs that seem like they should address this, none of them worked for us. Including our actions in the `now-ui.json` file according to the [Component Configuration docs](https://developer.servicenow.com/dev.do#!/reference/now-experience/sandiego/cli/now-ui-config) creates a record in the `sys_ux_lib_component_action` table, but it's unclear to us what exactly this record is for.
 
 The solution we settled on doesn't actually require that record to be created at all - from watching [this video posted by Darren Richards](https://www.youtube.com/watch?v=fyBVjuAY1wo), we discovered that there's a two-step workaround for getting UI Builder to recognize the events.
 
@@ -50,7 +50,7 @@ The solution we settled on doesn't actually require that record to be created at
 
 2. Second, to get the event to actually show up in the UIB sidebar when the component is selected, navigate to the `sys_ux_macroponent` table, search by the name of your custom component, and click the lock for 'Dispatched Events'. Reference the event we just created in `sys_ux_event`, and save the record.
 
-At with these two steps complete, the custom event appears in the component sidebar, it can be mapped just like any other UIB event, and the payload values can be used in event handlers by clicking the 'Dynamic Data Binding' button above a field and using the `@payload` variable.
+With these two steps complete, the custom event appears in the component sidebar, it can be mapped just like any other UIB event, and the payload values can be used in event handlers by clicking the 'Dynamic Data Binding' button above a field and using the `@payload` variable.
 
 For our component, we had already created a UIB page to display a record (based on the template) and set it up with required parameters of `table` and `sysId`, so all that was left was to add the inherited 'Link to destination' event handler on our newly visible click event, and configure it as normal, choosing the 'Record' App route and using `@payload` to pass the required parameters.
 
@@ -77,11 +77,11 @@ This gets a little wordy, but ultimately isn't so bad. To map an array of custom
 
 And then using `@item.value` on components within the repeater to grab what we need from each item in the result array. Using the previous example:
 
-<img src="images/article/article_6.png" alt="Passing results from a data resource to a repeater." />
+<img src="images/article/article_7.png" alt="Passing results from a data resource to a repeater." />
 
 And here's what the first couple fields look like in our component config - since everything was from the same table, it was easier to just insert the table name, but for the rest of the fields, we used the `@item` variable: 
 
-<img src="images/article/article_8.png" alt="Passing results from a data resource to a repeater." />
+<img src="images/article/article_8.png" alt="Using @item to grab the sysId and table in our component." />
 
 ## Migration
 
@@ -97,15 +97,17 @@ With that finished, the component was available to our colleagues to use just li
 
 ## Final Thoughts
 
-This was our first try
+This was definitely a learning experience for us - it was neat to work out how some of these processes work, and discover that there is a pretty large level of control and customization that possible using custom components and the CLI tools. However, it still feels as though our experience and implementation doesn't quite match what's intended. Though components like these, or even more complex components, can be created fairly rapidly (especially with more practice) - the intention is clearly to manage event handling through mapping and composition in UIB - and at this point, either we're not understanding the patterns well enough, or the UIB infrastructure is just not quite there yet. We're particularly interested to look more into how events are intended to be handled through **composition** with the built-in components like **Card Base Container**, which does have an on-click action that could be mapped to an event handler...but doesn't provide data or behaviors to its child component, making it puzzling to understand from the standpoint of a React developer.
 
+### Troubleshooting
 
+We wanted to make sure we mentioned the largest issue we had in the development of this component, because it was certainly a headscratcher and cost us a significant amount of time.
 
-## Other stuff
+For some reason, on the instance we were testing, our event handlers were all showing up, but some were suffixed with "(to be deprecated)" - and these event handlers weren't accepting our custom event. We couldn't figure out what was causing this, and ended up doing a sub-optimal workaround by catching the event at the page level and hijacking an existing action, `'NAV_ITEM_SELECTED'`. Ultimately, though, loading up a new application solved this problem, and fixed our component-level event handlers so that we didn't have to script a workaround - but we have no idea where the wires got crossed there. 
 
-- Having to restart a brand new app
+## Conclusion
 
-## Reflection
+The Now UI Framework is powerful, but it's a framework we're still learning bit by bit. We hope sharing our experiences was helpful to you - if you have questions or comments for us, or can help us to better understand the intended compositional patterns in UI builder, we'd love to hear from you at [info@esolutions.com](mailto:info@esolutions.com)! If you're looking for a more detailed, step-by-step breakdown of custom component creation, check out the ongoing **Custom Components in the Now Experience UI Framework** series on [our blog](https://creator-dna.com/blog). We'll also have the code for this component available to peruse in our brand-new [Component Library](https://creator-dna.com/component-library) - and we hope to add more examples to it soon!
 
-- Composition with the repeater
-- Turns out, a lot of what we did wasn't strictly necessary.
+Happy Coding,
+The esolutionsONE team
